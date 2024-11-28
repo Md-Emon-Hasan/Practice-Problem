@@ -1,24 +1,24 @@
-# Importing dependency
-from sklearn.datasets import load_iris
+# import dependency
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-import joblib
+from sklearn.linear_model import LinearRegression
+from sklearn.datasets import load_iris
+import pickle
 
-# Load the iris dataset
-iris = load_iris()
+# load iris datasets
+df = load_iris()
 
 # target the data
-x = iris.data
-y = iris.target
+x = df.data
+y = df.target
 
-# split the data
+# train the data
 x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.2,random_state=42,stratify=y)
 
-# train the data in RandomForesClassifier Algorithm
-model = RandomForestClassifier(n_estimators=100,ranodm_state=42)
+# set algorithm
+model = LinearRegression()
 
 # fit the model
 model.fit(x_train,y_train)
 
-# save the trained model to a file
-joblib.dump(model,'iris_model.pkl')
+# save the train model into the file
+pickle.dump(model,open('model.pkl','wb'))
